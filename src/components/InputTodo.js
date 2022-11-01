@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Proptypes from 'prop-types';
 import styles from '../styles/InputTodo.module.css';
 
 class InputTodo extends Component {
@@ -16,14 +17,18 @@ class InputTodo extends Component {
   };
 
   handleSubmit = (e) => {
+    const { addNewTodoProps } = this.props;
+    const { title } = this.state;
+
     e.preventDefault();
-    this.props.addNewTodoProps(this.state.title);
+    addNewTodoProps(title);
     this.setState({
       title: '',
     });
   };
 
   render() {
+    const { title } = this.state;
     return (
       <form onSubmit={this.handleSubmit} className={styles.formContainer}>
         <input
@@ -31,13 +36,23 @@ class InputTodo extends Component {
           name="title"
           type="text"
           placeholder="type todo..."
-          value={this.state.title}
+          value={title}
           onChange={this.handleChange}
         />
-        <button type="button" className={styles.submitTodo}>Submit</button>
+        <button type="button" className={styles.submitTodo}>
+          Submit
+        </button>
       </form>
     );
   }
 }
+
+InputTodo.defaultProps = {
+  addNewTodoProps: null,
+};
+
+InputTodo.propTypes = {
+  addNewTodoProps: Proptypes.func,
+};
 
 export default InputTodo;

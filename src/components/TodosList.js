@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import TodoItem from './TodoItem';
 
 class TodosList extends Component {
@@ -8,19 +9,32 @@ class TodosList extends Component {
   }
 
   render() {
+    const { todos, handleChangeProps, handleDeleteProps } = this.props;
     return (
       <ul>
-        {this.props.todos.map((todo) => (
+        {todos.map((todo) => (
           <TodoItem
             key={todo.id}
             todo={todo}
-            handleChangeProps={this.props.handleChangeProps}
-            handleDeleteProps={this.props.handleDeleteProps}
+            handleChangeProps={handleChangeProps}
+            handleDeleteProps={handleDeleteProps}
           />
         ))}
       </ul>
     );
   }
 }
+
+TodosList.defaultProps = {
+  todos: [],
+  handleChangeProps: null,
+  handleDeleteProps: null,
+};
+
+TodosList.propTypes = {
+  todos: PropTypes.arrayOf(Object),
+  handleChangeProps: PropTypes.func,
+  handleDeleteProps: PropTypes.func,
+};
 
 export default TodosList;
