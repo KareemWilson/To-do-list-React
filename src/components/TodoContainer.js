@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import InputTodo from "./InputTodo";
 import TodosList from "./TodosList";
 import { v4 as uuidv4 } from "uuid";
+import styles from "../styles/TodoContainer.module.css";
+import Header from "./Header";
 
 class TodoContainer extends Component {
   constructor(props) {
@@ -27,44 +29,47 @@ class TodoContainer extends Component {
     };
   }
 
-  handleChange = id => {
+  handleChange = (id) => {
     this.setState((prevState) => ({
       todos: prevState.todos.map((todo) => {
-        if(todo.id === id){
-          return{
+        if (todo.id === id) {
+          return {
             ...todo,
-            completed: !todo.completed
-          }
+            completed: !todo.completed,
+          };
         }
-        return todo
-      })
-    }))
+        return todo;
+      }),
+    }));
   };
-  handleDelete = id => {
+  handleDelete = (id) => {
     this.setState({
-      todos: [...this.state.todos.filter(todo => todo.id !== id)]
-    })
-  }
+      todos: [...this.state.todos.filter((todo) => todo.id !== id)],
+    });
+  };
 
-  addNewTodo = title => {
+  addNewTodo = (title) => {
     const newTodo = {
       id: uuidv4(),
       title: title,
-      completed: false
-    }
+      completed: false,
+    };
     this.setState({
-      todos: [...this.state.todos, newTodo]
-    })
-  }
+      todos: [...this.state.todos, newTodo],
+    });
+  };
   render() {
     return (
-      <div>
-        <InputTodo addNewTodoProps={this.addNewTodo} />
-        <TodosList
-          todos={this.state.todos}
-          handleChangeProps={this.handleChange}
-          handleDeleteProps={this.handleDelete}
-        />
+      <div className={styles.container}>
+        <div className={styles.inner}>
+          <Header />
+          <InputTodo addNewTodoProps={this.addNewTodo} />
+          <TodosList
+            todos={this.state.todos}
+            handleChangeProps={this.handleChange}
+            handleDeleteProps={this.handleDelete}
+          />
+        </div>
       </div>
     );
   }

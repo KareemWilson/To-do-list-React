@@ -1,5 +1,5 @@
-import { e } from "github-spray/alphabet";
 import React, { Component } from "react";
+import styles from '../styles/InputTodo.module.css'
 
 class InputTodo extends Component {
   state = {
@@ -20,15 +20,16 @@ class InputTodo extends Component {
   }
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className={styles.formContainer}>
         <input
+        className={styles.inputTodo}
           name="title"
           type="text"
           placeholder="type todo..."
           value={this.state.title}
           onChange={this.handleChange}
         />
-        <button>Submit</button>
+        <button className={styles.submitTodo}>Submit</button>
       </form>
     );
   }
