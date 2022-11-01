@@ -1,35 +1,40 @@
-import React, { Component } from "react";
-import styles from '../styles/InputTodo.module.css'
+import React, { Component } from 'react';
+import styles from '../styles/InputTodo.module.css';
 
 class InputTodo extends Component {
-  state = {
-    title: "",
-  };
+  constructor() {
+    super();
+    this.state = {
+      title: '',
+    };
+  }
 
   handleChange = (e) => {
     this.setState({
-        [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
+
   handleSubmit = (e) => {
-    e.preventDefault()
-    this.props.addNewTodoProps(this.state.title)
+    e.preventDefault();
+    this.props.addNewTodoProps(this.state.title);
     this.setState({
-        title: ''
-    })
-  }
+      title: '',
+    });
+  };
+
   render() {
     return (
       <form onSubmit={this.handleSubmit} className={styles.formContainer}>
         <input
-        className={styles.inputTodo}
+          className={styles.inputTodo}
           name="title"
           type="text"
           placeholder="type todo..."
           value={this.state.title}
           onChange={this.handleChange}
         />
-        <button className={styles.submitTodo}>Submit</button>
+        <button type="button" className={styles.submitTodo}>Submit</button>
       </form>
     );
   }
