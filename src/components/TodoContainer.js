@@ -44,9 +44,9 @@ class TodoContainer extends Component {
   };
 
   handleDelete = (id) => {
-    this.setState({
-      todos: [...this.state.todos.filter((todo) => todo.id !== id)],
-    });
+    this.setState((prevState) => ({
+      todos: [...prevState.todos.filter((todo) => todo.id !== id)],
+    }));
   };
 
   addNewTodo = (title) => {
@@ -55,9 +55,9 @@ class TodoContainer extends Component {
       title,
       completed: false,
     };
-    this.setState({
-      todos: [...this.state.todos, newTodo],
-    });
+    this.setState((prevState) => ({
+      todos: [...prevState.todos, newTodo],
+    }));
   };
 
   render() {

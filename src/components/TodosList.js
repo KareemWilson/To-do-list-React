@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import TodoItem from './TodoItem';
 
 class TodosList extends Component {
+  constructor() {
+    super();
+    this.state = {};
+  }
+
   render() {
     return (
       <ul>
