@@ -2,22 +2,23 @@ import React, { Component } from "react";
 import styles from '../styles/TodoItem.module.css'
 class TodoItem extends Component {
   render() {
+    const { id, completed, title } = this.props.todo
     return (
       <>
         <li className={styles.item}>
           <input
             type="checkbox"
-            checked={this.props.todo.completed}
+            checked={completed}
             className={styles.checkbox}
-            onChange={() => this.props.handleChangeProps(this.props.todo.id)}
+            onChange={() => this.props.handleChangeProps(id)}
           />
           <button
-          onClick={() => this.props.handleDeleteProps(this.props.todo.id)}
+          onClick={() => this.props.handleDeleteProps(id)}
         >
           Delete
         </button>
-        <span className={this.props.todo.completed ? styles.completedStyle : null}>
-          {this.props.todo.title}
+        <span className={completed ? styles.completedStyle : null}>
+          {title}
         </span>
         </li>
         
